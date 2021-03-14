@@ -1,0 +1,15 @@
+[Unit]
+Description=PP_BOT
+After=multi-user.target
+
+[Service]
+#User=pp-bot
+#Group=pp-bot
+Type=simple
+WorkingDirectory=/home/ubuntu/pp-bot/
+ExecStart=/usr/bin/python3 /home/ubuntu/pp-bot/main.py &> /var/log/pp-bot.log
+#StandardInput=tty-force
+
+[Install]
+WantedBy=multi-user.target
+

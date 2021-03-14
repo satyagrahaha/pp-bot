@@ -1,6 +1,7 @@
 import discord
 import random
 import configparser
+import sys
 
 class PP_BOT(discord.Client):
 
@@ -24,16 +25,29 @@ class PP_BOT(discord.Client):
       channel = await self.fetch_channel(payload.channel_id)
       message = await channel.fetch_message(payload.message_id)
       await message.add_reaction('<:shame:818856957364535297>')
-  
+
+#populate responses
+responses = open("responses").readlines()
+
+#create client
 client = PP_BOT()
 
+#read config file
 config = configparser.ConfigParser()
 config.read('config')
 
-responses = ['I\'m sorry. Did someone say my name?', \
-             'With friends like these, who needs friends?', \
-             '#becool', 'Y\'all like Shrek?', '..' ]
+#read args
+if len(sys.argv) > 1:
+    if sys.argv[1] == 'help':
+        sys.exit("Usage: python3 main.py [PROFILE_NAME]")
+    else:
+        profile = str(sys.argv[1])
+else:
+  profile = 'DEFAULT'
 
-token = config['DEFAULT']['token']
+#get token
+token = config[profile]['token']
 
+#start client
 client.run(token)
+
