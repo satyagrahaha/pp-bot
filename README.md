@@ -13,7 +13,7 @@ pp-bot is designed to run on EC2 instances.
 ## Configuration
 pp-bot takes its credentials from pp-bot/config
 
-*example*
+*example:*
 ```
 [DEFAULT]
 token=XXXXXXXXXXXXXXXXXXXX
@@ -25,8 +25,8 @@ token=XXXXXXXXXXXXXXXXXXXX
 ## Profiles
 pp-bot will use the DEFAULT configuration when started with no arguments, but an alternate profile can be passed when starting.
 
-*example*
-`python3 main.py TESTING
+*example:*
+`python3 main.py TESTING`
 
 ## Responses
 pp-bot will respond with phrases from pp-bot/response
