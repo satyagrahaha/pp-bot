@@ -41,7 +41,7 @@ if len(sys.argv) > 1:
     if sys.argv[1] == 'help':
         sys.exit("Usage: python3 main.py [PROFILE_NAME]")
     else:
-        profile = str(sys.argv[1])
+        profile = sys.argv[1]
 else:
   profile = 'DEFAULT'
 
