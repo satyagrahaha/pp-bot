@@ -2,22 +2,23 @@ import discord
 import random
 import configparser
 import sys
+import logging
 
 class PP_BOT(discord.Client):
 
   async def on_ready(self):
-    print('Logged on as {0}!'.format(self.user))
+    logging.info('Logged on as {0}!'.format(self.user))
     
   async def on_message(self, message):
     try:
       if self.user.id in message.raw_mentions:
         await message.channel.send(random.choice(responses))        
     except HTTPException:
-      print('HTTP Exception!')
+      logging.error('Message Send: HTTP Exception!')
     except Forbidden:
-      print('Forbidden!')
+      logging.error('Message Send: Forbidden!')
     except InvalidArgument:
-      print('InvalidArgument!')
+      logging.error('Message Send: InvalidArgument!')
       
   async def on_raw_reaction_add(self, payload):
 
@@ -47,6 +48,13 @@ else:
 
 #get token
 token = config[profile]['token']
+
+#setup log
+if config.has_option(profile,'log'):
+  log = config[profile]['log']
+else:
+  log = "/var/log/pp-bot.log"
+logging.basicConfig(filename=log,level=logging.DEBUG,format='%(asctime)s %(message)s', datefmt='%d/%m/%Y %H:%M:%S')
 
 #start client
 client.run(token)
