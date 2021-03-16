@@ -1,2 +1,4 @@
 config
 *.swp
+ansible/
+__pycache__/
